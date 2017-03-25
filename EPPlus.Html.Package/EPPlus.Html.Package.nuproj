@@ -13,21 +13,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Configuration">
-    <PackageId>EPPlus.Html.Package</PackageId>
+    <PackageId>EPPlus.Html</PackageId>
     <PackageVersion Condition="'$(PackageVersion)' == ''">0.1.0</PackageVersion>
-    <Title>EPPlus.Html.Package</Title>
-    <Authors>tw</Authors>
-    <Owners>tw</Owners>
-    <Summary>EPPlus.Html.Package</Summary>
-    <Description>EPPlus.Html.Package</Description>
+    <Title>EPPlus.Html</Title>
+    <Authors>Till Wolff</Authors>
+    <Owners>Till Wolff</Owners>
+    <Summary>EPPlus.Html</Summary>
+    <Description>I'm here to extend EPPlus with a html export ;)</Description>
     <PackageReleaseNotes>
     </PackageReleaseNotes>
     <PackageProjectUrl>
     </PackageProjectUrl>
     <PackageLicenseUrl>
     </PackageLicenseUrl>
-    <Copyright>Copyright © tw</Copyright>
-    <PackageTags>EPPlus.Html.Package</PackageTags>
+    <Copyright>Copyright © Till Wolff 2017</Copyright>
+    <PackageTags>EPPlus.Html</PackageTags>
   </PropertyGroup>
   <PropertyGroup Label="Globals">
     <OutputPath>bin\$(Configuration)\</OutputPath>
