@@ -33,7 +33,7 @@ namespace EPPlus.Html
                 {
                     ExcelRange excelCell = sheet.Cells[row, col];
                     HtmlElement htmlCell = htmlRow.AddChild("td");
-                    htmlCell.Content = excelCell.Value?.ToString();
+                    htmlCell.Content = excelCell.Text;
                     htmlCell.Styles.Update(excelCell.ToCss());
                 }
             }
