@@ -79,7 +79,11 @@ namespace EPPlus.Html.Converters
         {
             if (excelBorderItem != null)
             {
-                return excelBorderItem.Style.ToCssProperty() + " " + excelBorderItem.Color.ToHexCode();
+                string color = (excelBorderItem.Color.Rgb != null)
+                    ? excelBorderItem.Color.ToHexCode()
+                    : "black";
+
+                return excelBorderItem.Style.ToCssProperty() + " " + color;
             }
             else
             {
