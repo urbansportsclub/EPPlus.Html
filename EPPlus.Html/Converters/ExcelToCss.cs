@@ -69,6 +69,8 @@ namespace EPPlus.Html.Converters
 
             css["border-top"] = border.Top.ToCssProperty();
             css["border-bottom"] = border.Bottom.ToCssProperty();
+            css["border-right"] = border.Right.ToCssProperty();
+            css["border-left"] = border.Left.ToCssProperty();
 
             return css;
         }
