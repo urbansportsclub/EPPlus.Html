@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPPlus.Html", "EPPlus.Html\EPPlus.Html.csproj", "{6A9878F8-48CA-410E-92E8-6941F580D39B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPPlus.Html.Test", "EPPlus.Html.Test\EPPlus.Html.Test.csproj", "{DB4C442E-D5FF-4DD2-A809-496D16646D9D}"
+EndProject
+Project("{5DD5E4FA-CB73-4610-85AB-557B54E96AA9}") = "EPPlus.Html.Package", "EPPlus.Html.Package\EPPlus.Html.Package.nuproj", "{65524BC8-C7CB-402C-B200-BC8456AAAB53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{DB4C442E-D5FF-4DD2-A809-496D16646D9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB4C442E-D5FF-4DD2-A809-496D16646D9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB4C442E-D5FF-4DD2-A809-496D16646D9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65524BC8-C7CB-402C-B200-BC8456AAAB53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65524BC8-C7CB-402C-B200-BC8456AAAB53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65524BC8-C7CB-402C-B200-BC8456AAAB53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65524BC8-C7CB-402C-B200-BC8456AAAB53}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
