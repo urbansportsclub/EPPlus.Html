@@ -15,11 +15,11 @@
   <PropertyGroup Label="Configuration">
     <PackageId>EPPlus.Html</PackageId>
     <PackageVersion Condition="'$(PackageVersion)' == ''">0.1.0</PackageVersion>
-    <Title>EPPlus.Html</Title>
+    <Title>EPPlus.Html [Preview]</Title>
     <Authors>Till Wolff</Authors>
     <Owners>Till Wolff</Owners>
-    <Summary>EPPlus.Html</Summary>
-    <Description>I'm here to extend EPPlus with a html export ;)</Description>
+    <Summary>EPPlus.Html [Preview]</Summary>
+    <Description>[Preview] Hi, I'm here to extend EPPlus with a html export ;)</Description>
     <PackageReleaseNotes>
     </PackageReleaseNotes>
     <PackageProjectUrl>
@@ -27,7 +27,7 @@
     <PackageLicenseUrl>
     </PackageLicenseUrl>
     <Copyright>Copyright © Till Wolff 2017</Copyright>
-    <PackageTags>EPPlus.Html</PackageTags>
+    <PackageTags>EPPlus.Html EPPlus html export convert xlsx to html</PackageTags>
   </PropertyGroup>
   <PropertyGroup Label="Globals">
     <OutputPath>bin\$(Configuration)\</OutputPath>
