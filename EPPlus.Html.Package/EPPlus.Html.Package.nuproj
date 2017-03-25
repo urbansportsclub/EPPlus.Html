@@ -14,7 +14,7 @@
   </ItemGroup>
   <PropertyGroup Label="Configuration">
     <PackageId>EPPlus.Html.Package</PackageId>
-    <PackageVersion Condition="'$(PackageVersion)' == ''">1.0.0</PackageVersion>
+    <PackageVersion Condition="'$(PackageVersion)' == ''">0.1.0</PackageVersion>
     <Title>EPPlus.Html.Package</Title>
     <Authors>tw</Authors>
     <Owners>tw</Owners>
