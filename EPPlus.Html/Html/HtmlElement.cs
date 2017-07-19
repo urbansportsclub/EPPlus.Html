@@ -11,6 +11,8 @@ namespace EPPlus.Html.Html
         public string TagName { get; private set; }
         public string Content { get; set; }
         public CssInlineStyles Styles { get; private set; }
+        public CssInlineClasses InlineClasses { get; private set; }
+        public CssClassTable ClassTable { get; set; }
         public HtmlAttributeCollection Attributes { get; private set; }
         public HtmlElementCollection Children { get; private set; }
 
@@ -18,6 +20,8 @@ namespace EPPlus.Html.Html
         {
             this.TagName = tagName;
             this.Styles = new CssInlineStyles();
+            this.InlineClasses = new CssInlineClasses();
+            this.ClassTable = new CssClassTable();
             this.Attributes = new HtmlAttributeCollection();
             this.Children = new HtmlElementCollection();
         }
@@ -35,14 +39,37 @@ namespace EPPlus.Html.Html
 
         public void Render(StringBuilder html)
         {
+            if (ClassTable.Any())
+            {
+                html.AppendLine("<style>");
+                foreach (var styledef in ClassTable.Keys)
+                {
+                    html.AppendLine("." + ClassTable[styledef]+ " {");
+                    html.AppendLine("  " + styledef.Replace(";", ";\n  ").TrimEnd());
+                    html.AppendLine("}");
+                }
+                html.AppendLine("</style>");
+            }
+
             html.Append("<");
             html.Append(this.TagName);
 
-            if (this.Styles.Any())
+
+            if (InlineClasses.Any())
             {
                 html.Append(" ");
-                this.Styles.Render(html);
+                this.InlineClasses.Render(html);
                 html.Append(" ");
+            }
+            else
+            {
+                if (this.Styles.Any())
+                {
+                    html.Append(" ");
+                    this.Styles.Render(html);
+                    html.Append(" ");
+                }
+
             }
 
             if (this.Attributes.Any())
@@ -70,5 +97,6 @@ namespace EPPlus.Html.Html
             this.Render(html);
             return html.ToString();
         }
+
     }
 }

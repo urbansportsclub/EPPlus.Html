@@ -11,67 +11,110 @@ namespace EPPlus.Html.Converters
 {
     internal static class ExcelToCss
     {
-        internal static CssDeclaration ToCss(this ExcelRow excelRow)
+        internal static CssDeclaration ToCss(this ExcelRow excelRow, HtmlExportOptions options)
         {
             var css = new CssDeclaration();
 
-            css["height"] = excelRow.Height + "px";
-
-            css.Update(excelRow.Style.ToCss());
-
+            if ((options & HtmlExportOptions.Height) == HtmlExportOptions.Height)
+            {
+                css["height"] = excelRow.Height + "px";
+            }
+            css.Update(excelRow.Style.ToCss(options));
             return css;
         }
 
         internal static CssDeclaration ToCss(this ExcelRange excelRange)
         {
+            return excelRange.ToCss(HtmlExportOptions.All);
+        }
+
+        internal static CssDeclaration ToCss(this ExcelRange excelRange, HtmlExportOptions options)
+        {
             var css = new CssDeclaration();
             if (excelRange.Columns == 1 && excelRange.Rows == 1)
             {
                 var excelColumn = excelRange.Worksheet.Column(excelRange.Start.Column);
-
-                css["max-width"] = excelColumn.Width + "em";
-                css["width"] = excelColumn.Width + "em";
-                css.Update(excelRange.Style.ToCss());
+                if ((options & HtmlExportOptions.Width) == HtmlExportOptions.Width)
+                {
+                    css["max-width"] = excelColumn.Width + "em";
+                    css["width"] = excelColumn.Width + "em";
+                }
+                css.Update(excelRange.Style.ToCss(options));
             }
             return css;
-        }      
+        }
 
         internal static CssDeclaration ToCss(this ExcelStyle excelStyle)
         {
+            return excelStyle.ToCss(HtmlExportOptions.All);
+        }
+
+        internal static CssDeclaration ToCss(this ExcelStyle excelStyle, HtmlExportOptions options)
+        {
             var css = new CssDeclaration();
-            css["text-align"] = excelStyle.HorizontalAlignment.ToCssProperty();
-            css["background-color"] = excelStyle.Fill.BackgroundColor.ToHexCode();
-            css.Update(excelStyle.Font.ToCss());
-            css.Update(excelStyle.Border.ToCss());
+            if ((options & HtmlExportOptions.Fill) == HtmlExportOptions.Fill)
+            {
+                css["background-color"] = excelStyle.Fill.BackgroundColor.ToHexCode();
+            }
+            if ((options & HtmlExportOptions.Borders) == HtmlExportOptions.Borders)
+            {
+                css.Update(excelStyle.Border.ToCss());
+            }
+            if ((options & HtmlExportOptions.TextAlign) == HtmlExportOptions.TextAlign)
+            {
+                css["text-align"] = excelStyle.HorizontalAlignment.ToCssProperty();
+            }
+            css.Update(excelStyle.Font.ToCss(options));
             return css;
         }
 
         internal static CssDeclaration ToCss(this ExcelFont excelFont)
         {
+            return excelFont.ToCss(HtmlExportOptions.All);
+        }
+
+        internal static CssDeclaration ToCss(this ExcelFont excelFont, HtmlExportOptions options)
+        {
             var css = new CssDeclaration();
 
-            if (excelFont.Bold)
+            if (excelFont.Bold && (options & HtmlExportOptions.FontWeight) == HtmlExportOptions.FontWeight)
             {
                 css["font-weight"] = "bold";
             }
-
-            css["font-family"] = excelFont.Name;
-            css["font-size"] = excelFont.Size + "pt";
-
-            css["color"] = excelFont.Color.ToHexCode();
-
+            if ((options & HtmlExportOptions.FontFamily) == HtmlExportOptions.FontFamily)
+            {
+                css["font-family"] = excelFont.Name;
+            }
+            if ((options & HtmlExportOptions.FontSize) == HtmlExportOptions.FontSize)
+            {
+                css["font-size"] = excelFont.Size + "pt";
+            }
+            if ((options & HtmlExportOptions.FontColor) == HtmlExportOptions.FontColor)
+            {
+                css["color"] = excelFont.Color.ToHexCode();
+            }
             return css;
         }
 
         internal static CssDeclaration ToCss(this Border border)
         {
             var css = new CssDeclaration();
-
-            css["border-top"] = border.Top.ToCssProperty();
-            css["border-bottom"] = border.Bottom.ToCssProperty();
-            css["border-right"] = border.Right.ToCssProperty();
-            css["border-left"] = border.Left.ToCssProperty();
-
+            if (border.Top.Style != ExcelBorderStyle.None)
+            {
+                css["border-top"] = border.Top.ToCssProperty();
+            }
+            if (border.Bottom.Style != ExcelBorderStyle.None)
+            {
+                css["border-bottom"] = border.Bottom.ToCssProperty();
+            }
+            if (border.Right.Style != ExcelBorderStyle.None)
+            {
+                css["border-right"] = border.Right.ToCssProperty();
+            }
+            if (border.Left.Style != ExcelBorderStyle.None)
+            {
+                css["border-left"] = border.Left.ToCssProperty();
+            };
             return css;
         }
 
@@ -99,8 +142,10 @@ namespace EPPlus.Html.Converters
                     return "1px solid";
                 case ExcelBorderStyle.Thick:
                     return "2px solid";
-                default:
+                case ExcelBorderStyle.None:
                     return "none";
+                default:
+                    return "1px solid";
             }
         }
 
