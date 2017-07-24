@@ -1,4 +1,5 @@
-﻿using EPPlus.Html.Converters;
+﻿
+using EPPlus.Html.Converters;
 using EPPlus.Html.Html;
 using OfficeOpenXml;
 using System;
@@ -15,6 +16,11 @@ namespace EPPlus.Html
         public static string ToHtml(this ExcelWorksheet sheet)
         {
             return sheet.ToHtml(HtmlExportOptions.All);
+        }
+
+        public static string ToHtml(this ExcelWorksheet sheet, bool consolidateStyles)
+        {
+            return sheet.ToHtml(HtmlExportOptions.All, consolidateStyles);
         }
 
         public static string ToHtml(this ExcelWorksheet sheet, HtmlExportOptions options)
@@ -52,8 +58,11 @@ namespace EPPlus.Html
             }
 
             // consolidate styles into classes
-            htmlTable.ClassTable = new CssClassTable();
-            htmlTable.ConsolidateStyles(htmlTable.ClassTable);
+            if (consolidateStyles)
+            {
+                htmlTable.ClassTable = new CssClassTable();
+                htmlTable.ConsolidateStyles(htmlTable.ClassTable);
+            }
 
             return htmlTable.ToString();
         }

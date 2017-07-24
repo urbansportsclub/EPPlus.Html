@@ -9,15 +9,15 @@ namespace EPPlus.Html
         TextAlign = 1,
         Borders = 2,
         Fill = 4,
-        BordersAndFill = 6,
+        BordersAndFill = 6, // combination
         Width = 8,
         Height = 16,
-        WidthAndHeight = 24,
+        WidthAndHeight = 24, // combination
         FontFamily = 32,
         FontSize = 64,
         FontWeight = 128,
         FontColor = 256,
-        Font = 480,
-        All = 511
+        Font = 480, // combination
+        All = 511 // combination
     }
 }
