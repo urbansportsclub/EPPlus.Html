@@ -50,7 +50,8 @@
   <ItemGroup>
     <Compile Include="Converters\ExcelToCss.cs" />
     <Compile Include="EPPlusExtensions.cs" />
-    <Compile Include="HtmlExportOptions.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="HtmlExportConfiguration.cs" />
     <Compile Include="Html\CssClassTable.cs" />
     <Compile Include="Html\CssDeclaration.cs" />
     <Compile Include="Html\CssInlineClasses.cs" />

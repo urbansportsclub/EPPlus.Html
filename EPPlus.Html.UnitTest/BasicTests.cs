@@ -44,37 +44,35 @@ namespace Test
         public void OptionsNone()
         {
             ExcelWorksheet ws = GetWorkSheet();
-            ExportExcel(ws, HtmlExportOptions.None);
+            ExportExcel(ws, HtmlExportConfiguration.Minimal());
         }
 
         [TestMethod]
         public void OptionsAll()
         {
             ExcelWorksheet ws = GetWorkSheet();
-            ExportExcel(ws, HtmlExportOptions.All);
+            ExportExcel(ws, HtmlExportConfiguration.Default());
         }
 
         [TestMethod]
         public void OptionsBorders()
         {
             ExcelWorksheet ws = GetWorkSheet();
-            ExportExcel(ws, HtmlExportOptions.Borders);
+            ExportExcel(ws, new HtmlExportConfiguration() { Borders = true });
         }
 
         [TestMethod]
         public void OptionsFill()
         {
             ExcelWorksheet ws = GetWorkSheet();
-            ExportExcel(ws, HtmlExportOptions.Fill);
+            ExportExcel(ws, new HtmlExportConfiguration() { Fill = true });
         }
 
         [TestMethod]
         public void OptionsBordersAndFill()
         {
             ExcelWorksheet ws = GetWorkSheet();
-            var html1 = ExportExcel(ws, HtmlExportOptions.BordersAndFill);
-            var html2 = ExportExcel(ws, HtmlExportOptions.Borders | HtmlExportOptions.Fill);
-            Assert.AreEqual(html1, html2, "Combined HtmlExportOptions 'BordersAndFill' do not equal the merged options");
+            ExportExcel(ws, new HtmlExportConfiguration() { Borders = true, Fill = true });
         }
 
         [TestMethod]
@@ -82,16 +80,16 @@ namespace Test
         {
             ExcelWorksheet ws = GetWorkSheet();
             var html1 = ws.ToHtml(true);
-            Assert.IsNotNull(html1, $"html generated without is null");
-            var html2 = ExportExcel(ws, HtmlExportOptions.All);
-            Assert.AreEqual(html1, html2, "HtmlExportOptions unspecified is not the same as HtmlExportOptions.All");
+            Assert.IsNotNull(html1, $"html generated without configuration is null");
+            var html2 = ExportExcel(ws, HtmlExportConfiguration.Default());
+            Assert.AreEqual(html1, html2, "HtmlExportConfiguration unspecified is not the same as HtmlExportConfiguration.Default()");
         }
 
-        private string ExportExcel(ExcelWorksheet ws, HtmlExportOptions options)
+        private string ExportExcel(ExcelWorksheet ws, HtmlExportConfiguration configuration)
         {
-            var html = ws.ToHtml(options, true);
-            Assert.IsNotNull(html, $"html generated with HtmlExportOption {options.ToString()} is null");
-            var outputFileName = OUTPUT_FILE.Replace("_", "_" + options.ToString());
+            var html = ws.ToHtml(configuration, true);
+            Assert.IsNotNull(html, $"html generated with HtmlExportConfiguration {configuration.ToString()} is null");
+            var outputFileName = OUTPUT_FILE.Replace("_", "_" + configuration.ToString());
             var cwd = Directory.GetCurrentDirectory();
             File.WriteAllText(Path.Combine(cwd, "../../TestOutput", outputFileName), html);
             return html;

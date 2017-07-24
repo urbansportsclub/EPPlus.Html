@@ -8,27 +8,24 @@ using System.Text;
 
 namespace EPPlus.Html
 {
-
-#pragma warning disable S101 // Types should be named in camel case
     public static class EPPlusExtensions 
-#pragma warning restore S101 // Types should be named in camel case
     {
         public static string ToHtml(this ExcelWorksheet sheet)
         {
-            return sheet.ToHtml(HtmlExportOptions.All);
+            return sheet.ToHtml(HtmlExportConfiguration.Default());
         }
 
         public static string ToHtml(this ExcelWorksheet sheet, bool consolidateStyles)
         {
-            return sheet.ToHtml(HtmlExportOptions.All, consolidateStyles);
+            return sheet.ToHtml(HtmlExportConfiguration.Default(), consolidateStyles);
         }
 
-        public static string ToHtml(this ExcelWorksheet sheet, HtmlExportOptions options)
+        public static string ToHtml(this ExcelWorksheet sheet, HtmlExportConfiguration configuration)
         {
-            return sheet.ToHtml(options, false);
+            return sheet.ToHtml(configuration, false);
         }
 
-        public static string ToHtml(this ExcelWorksheet sheet, HtmlExportOptions options, bool consolidateStyles)
+        public static string ToHtml(this ExcelWorksheet sheet, HtmlExportConfiguration configuration, bool consolidateStyles)
         {
             int lastRow = sheet.Dimension.Rows;
             int lastCol = sheet.Dimension.Columns;
@@ -43,9 +40,9 @@ namespace EPPlus.Html
                 ExcelRow excelRow = sheet.Row(row);
 
                 HtmlElement htmlRow = htmlTable.AddChild("tr");
-                if ((options & HtmlExportOptions.Height) == HtmlExportOptions.Height)
+                if (configuration.Height)
                 {
-                    htmlRow.Styles.Update(excelRow.ToCss(options));
+                    htmlRow.Styles.Update(excelRow.ToCss(configuration));
                 }
 
                 for (int col = 1; col <= lastCol; col++)
@@ -53,7 +50,7 @@ namespace EPPlus.Html
                     ExcelRange excelCell = sheet.Cells[row, col];
                     HtmlElement htmlCell = htmlRow.AddChild("td");
                     htmlCell.Content = excelCell.Text;
-                    htmlCell.Styles.Update(excelCell.ToCss(options));
+                    htmlCell.Styles.Update(excelCell.ToCss(configuration));
                 }
             }
 

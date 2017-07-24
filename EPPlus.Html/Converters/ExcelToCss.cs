@@ -11,85 +11,85 @@ namespace EPPlus.Html.Converters
 {
     internal static class ExcelToCss
     {
-        internal static CssDeclaration ToCss(this ExcelRow excelRow, HtmlExportOptions options)
+        internal static CssDeclaration ToCss(this ExcelRow excelRow, HtmlExportConfiguration configuration)
         {
             var css = new CssDeclaration();
 
-            if ((options & HtmlExportOptions.Height) == HtmlExportOptions.Height)
+            if (configuration.Height)
             {
                 css["height"] = excelRow.Height + "px";
             }
-            css.Update(excelRow.Style.ToCss(options));
+            css.Update(excelRow.Style.ToCss(configuration));
             return css;
         }
 
-        internal static CssDeclaration ToCss(this ExcelRange excelRange)
+        internal static CssDeclaration ToCss(this ExcelRangeBase excelRange)
         {
-            return excelRange.ToCss(HtmlExportOptions.All);
+            return excelRange.ToCss(HtmlExportConfiguration.Default());
         }
 
-        internal static CssDeclaration ToCss(this ExcelRange excelRange, HtmlExportOptions options)
+        internal static CssDeclaration ToCss(this ExcelRangeBase excelRange, HtmlExportConfiguration configuration)
         {
             var css = new CssDeclaration();
             if (excelRange.Columns == 1 && excelRange.Rows == 1)
             {
                 var excelColumn = excelRange.Worksheet.Column(excelRange.Start.Column);
-                if ((options & HtmlExportOptions.Width) == HtmlExportOptions.Width)
+                if (configuration.Width)
                 {
                     css["max-width"] = excelColumn.Width + "em";
                     css["width"] = excelColumn.Width + "em";
                 }
-                css.Update(excelRange.Style.ToCss(options));
+                css.Update(excelRange.Style.ToCss(configuration));
             }
             return css;
         }
 
         internal static CssDeclaration ToCss(this ExcelStyle excelStyle)
         {
-            return excelStyle.ToCss(HtmlExportOptions.All);
+            return excelStyle.ToCss(HtmlExportConfiguration.Default());
         }
 
-        internal static CssDeclaration ToCss(this ExcelStyle excelStyle, HtmlExportOptions options)
+        internal static CssDeclaration ToCss(this ExcelStyle excelStyle, HtmlExportConfiguration configuration)
         {
             var css = new CssDeclaration();
-            if ((options & HtmlExportOptions.Fill) == HtmlExportOptions.Fill)
+            if (configuration.Fill)
             {
                 css["background-color"] = excelStyle.Fill.BackgroundColor.ToHexCode();
             }
-            if ((options & HtmlExportOptions.Borders) == HtmlExportOptions.Borders)
+            if (configuration.Borders)
             {
                 css.Update(excelStyle.Border.ToCss());
             }
-            if ((options & HtmlExportOptions.TextAlign) == HtmlExportOptions.TextAlign)
+            if (configuration.TextAlign)
             {
                 css["text-align"] = excelStyle.HorizontalAlignment.ToCssProperty();
             }
-            css.Update(excelStyle.Font.ToCss(options));
+            css.Update(excelStyle.Font.ToCss(configuration));
             return css;
         }
 
         internal static CssDeclaration ToCss(this ExcelFont excelFont)
         {
-            return excelFont.ToCss(HtmlExportOptions.All);
+            return excelFont.ToCss(HtmlExportConfiguration.Default());
         }
 
-        internal static CssDeclaration ToCss(this ExcelFont excelFont, HtmlExportOptions options)
+        internal static CssDeclaration ToCss(this ExcelFont excelFont, HtmlExportConfiguration configuration)
         {
             var css = new CssDeclaration();
 
-            if (excelFont.Bold && (options & HtmlExportOptions.FontWeight) == HtmlExportOptions.FontWeight)
+            if (excelFont.Bold && configuration.FontWeight)
             {
                 css["font-weight"] = "bold";
             }
-            if ((options & HtmlExportOptions.FontFamily) == HtmlExportOptions.FontFamily)
+            if (configuration.FontFamily)
             {
                 css["font-family"] = excelFont.Name;
             }
-            if ((options & HtmlExportOptions.FontSize) == HtmlExportOptions.FontSize)
+            if (configuration.FontSize)
             {
                 css["font-size"] = excelFont.Size + "pt";
             }
-            if ((options & HtmlExportOptions.FontColor) == HtmlExportOptions.FontColor)
+            if (configuration.FontColor)
             {
                 css["color"] = excelFont.Color.ToHexCode();
             }
