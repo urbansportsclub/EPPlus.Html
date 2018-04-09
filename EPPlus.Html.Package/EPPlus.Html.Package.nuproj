@@ -14,7 +14,7 @@
   </ItemGroup>
   <PropertyGroup Label="Configuration">
     <PackageId>EPPlus.Html</PackageId>
-    <PackageVersion Condition="'$(PackageVersion)' == ''">0.1.0</PackageVersion>
+    <PackageVersion Condition="'$(PackageVersion)' == ''">0.2.0</PackageVersion>
     <Title>EPPlus.Html [Preview]</Title>
     <Authors>Till Wolff</Authors>
     <Owners>Till Wolff</Owners>
@@ -26,7 +26,7 @@
     </PackageProjectUrl>
     <PackageLicenseUrl>
     </PackageLicenseUrl>
-    <Copyright>Copyright © Till Wolff 2017</Copyright>
+    <Copyright>Copyright © Till Wolff 2018</Copyright>
     <PackageTags>EPPlus.Html EPPlus html export convert xlsx to html</PackageTags>
   </PropertyGroup>
   <PropertyGroup Label="Globals">

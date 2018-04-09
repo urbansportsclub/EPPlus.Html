@@ -31,6 +31,8 @@ namespace EPPlus.Html.Converters
 
                 css["max-width"] = excelColumn.Width + "em";
                 css["width"] = excelColumn.Width + "em";
+                css["overflow"] = excelRange.Worksheet.Cells[excelRange.End.Row, excelRange.End.Column + 1].Value != null ? "hidden" : null;
+
                 css.Update(excelRange.Style.ToCss());
             }
             return css;
@@ -41,6 +43,7 @@ namespace EPPlus.Html.Converters
             var css = new CssDeclaration();
             css["text-align"] = excelStyle.HorizontalAlignment.ToCssProperty();
             css["background-color"] = excelStyle.Fill.BackgroundColor.ToHexCode();
+            css["overflow"] = excelStyle.HorizontalAlignment == ExcelHorizontalAlignment.Fill ? "hidden" : null;
             css.Update(excelStyle.Font.ToCss());
             css.Update(excelStyle.Border.ToCss());
             return css;
