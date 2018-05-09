@@ -14,7 +14,7 @@ namespace EPPlus.Html.Test
         [TestMethod]
         public void ExcelToHtml1()
         {
-            FileInfo test001 = new FileInfo(CurrentLocation + "\\Resources\\Test001.xlsx");
+            FileInfo test001 = new FileInfo(@"C:\Users\adkerti\Desktop\2018 KL Auto Dim PROXI As Of 05-07-2018 9.30 AM (8).xlsx");
             var package = new ExcelPackage(test001);
             var worksheet = package.Workbook.Worksheets[1];
 
