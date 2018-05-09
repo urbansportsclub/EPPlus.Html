@@ -44,7 +44,7 @@ namespace EPPlus.Html.Converters
             css["text-align"] = excelStyle.HorizontalAlignment.ToCssProperty();
             css["background-color"] = excelStyle.Fill.BackgroundColor.ToHexCode();
             css["overflow"] = excelStyle.HorizontalAlignment == ExcelHorizontalAlignment.Fill ? "hidden" : null;
-            css["padding-left"] = $"{excelStyle.Indent * 5}px";
+            css["padding-left"] = $"{excelStyle.Indent * 10}px";
             css.Update(excelStyle.Font.ToCss());
             css.Update(excelStyle.Border.ToCss());
             return css;
