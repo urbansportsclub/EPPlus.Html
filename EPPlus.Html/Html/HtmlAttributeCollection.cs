@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace EPPlus.Html.Html
 {
-    public class HtmlAttributeCollection : Dictionary<string, object>, RenderElement
+    public class HtmlAttributeCollection : Dictionary<string, object>, IRenderElement
     {
         public void Render(StringBuilder html)
         {

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace EPPlus.Html.Html
 {
-    public class HtmlElement : RenderElement
+    public class HtmlElement : IRenderElement
     {
         public string TagName { get; private set; }
         public string Content { get; set; }

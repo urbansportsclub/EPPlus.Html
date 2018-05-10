@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace EPPlus.Html.Html
 {
-    public class HtmlElementCollection : List<HtmlElement>, RenderElement
+    public class HtmlElementCollection : List<HtmlElement>, IRenderElement
     {
         public void Render(StringBuilder html)
         {
