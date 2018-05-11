@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace EPPlus.Html.Html
 {
-    public class CssInlineStyles : CssDeclaration, RenderElement
+    public class CssInlineStyles : CssDeclaration, IRenderElement
     {
         public void Render(StringBuilder html)
         {
