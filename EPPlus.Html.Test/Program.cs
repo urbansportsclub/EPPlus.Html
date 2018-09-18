@@ -17,7 +17,7 @@ namespace EPPlus.Html.Test
 
         static void Main(string[] args)
         {
-            var package = new ExcelPackage(new FileInfo(CurrentLocation + "/Resources/Test001.xlsx"));
+            var package = new ExcelPackage(Test001);
             var worksheet = package.Workbook.Worksheets[1];
 
             string html = worksheet.ToHtml();

@@ -44,6 +44,7 @@ namespace EPPlus.Html.Converters
             css["text-align"] = excelStyle.HorizontalAlignment.ToCssProperty();
             css["background-color"] = excelStyle.Fill.BackgroundColor.ToHexCode();
             css["overflow"] = excelStyle.HorizontalAlignment == ExcelHorizontalAlignment.Fill ? "hidden" : null;
+            css["white-space"] = excelStyle.WrapText ? "normal" : null;
             css.Update(excelStyle.Font.ToCss());
             css.Update(excelStyle.Border.ToCss());
             return css;
