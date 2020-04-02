@@ -1,7 +1,8 @@
 if: branch IN (alpha, beta, master)
 
-language: shell
-os: windows
+language: csharp
+mono: none
+dotnet: 3.1
 
 script:
 - if [[ $TRAVIS_BRANCH = "master" ]] ; then
