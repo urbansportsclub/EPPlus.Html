@@ -22,14 +22,14 @@ namespace EPPlus.Html.Test
 
             string html = worksheet.ToHtml();
 
-            Show(html);
-        }
-
-        static void Show(string html)
-        {
             string tmpFile = Path.GetTempFileName() + ".html";
             File.WriteAllText(tmpFile, html);
-            Process.Start(tmpFile);
+
+            Console.Write("Writing file to ");
+            Console.WriteLine(tmpFile);
+            Console.WriteLine("Press any key to exit");
+
+            Console.ReadKey();
         }
     }
 }
