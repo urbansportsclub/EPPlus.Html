@@ -10,6 +10,7 @@
     <Copyright>Fitogram GmbH</Copyright>
     <RepositoryUrl>https://github.com/fitogram/EPPlus.Html</RepositoryUrl>
     <PackageReleaseNotes>Updated to .NET Standard 2.0</PackageReleaseNotes>
+    <Company>Fitogram GmbH</Company>
   </PropertyGroup>
 
   <ItemGroup>
