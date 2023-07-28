@@ -43,4 +43,4 @@ jobs:
     - name: Pack
       run: dotnet pack --configuration Release --no-build -p:PackageVersion=${{ env.PUBLISH_VERSION }}
     - name: Push
-      run: dotnet nuget push **/bin/Release/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} -s https://nuget.pkg.github.com/urbansportsclub/index.json --skip-duplicate --no-symbols
+      run: dotnet nuget push **EPPlus.HTML/bin/Release/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} -s https://nuget.pkg.github.com/urbansportsclub/index.json --skip-duplicate --no-symbols
