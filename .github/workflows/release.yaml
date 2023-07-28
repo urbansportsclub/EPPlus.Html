@@ -1,0 +1,49 @@
+name: Publish Package
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+permissions: 
+  packages: write
+
+jobs:
+  build:
+
+    runs-on: [self-hosted, nonroot]
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
+    - name: Inject slug/short variables
+      uses: rlespinasse/github-slug-action@v4
+      with:
+        prefix: CI_
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: |
+          6.x
+          3.1.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Nerdbank.GitVersioning
+      id: nbgv
+      uses: dotnet/nbgv@v0.4.1
+    - name: Build version (master)
+      if: env.CI_GITHUB_REF_SLUG == 'master'
+      run: echo "PUBLISH_VERSION=${{ steps.nbgv.outputs.SimpleVersion }}.${{ steps.nbgv.outputs.VersionHeight }}" >> $GITHUB_ENV
+    - name: Build version (PR)
+      if: env.CI_GITHUB_REF_SLUG != 'master'
+      run: echo "PUBLISH_VERSION=${{ steps.nbgv.outputs.SimpleVersion }}.${{ steps.nbgv.outputs.VersionHeight }}-${{ env.CI_GITHUB_HEAD_REF_SLUG }}" >> $GITHUB_ENV
+    - name: Build
+      run: dotnet build --configuration Release -p:Version=${{ env.PUBLISH_VERSION }} --no-restore
+    - name: Pack
+      run: dotnet pack --configuration Release --no-build -p:PackageVersion=${{ env.PUBLISH_VERSION }}
+    - name: Push
+      run: dotnet nuget push **EPPlus.HTML/bin/Release/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} -s https://nuget.pkg.github.com/urbansportsclub/index.json --skip-duplicate --no-symbols
