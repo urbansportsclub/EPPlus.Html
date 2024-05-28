@@ -43,6 +43,8 @@ jobs:
         run: dotnet restore
       - name: Build
         run: dotnet build --configuration Release -p:Version=${{ steps.version.outputs.version }} --no-restore
+      - name: Run Tests
+        run: dotnet test
       - name: Pack
         run: dotnet pack --configuration Release --no-build -p:Version=${{ steps.version.outputs.version }}
       - name: Push
